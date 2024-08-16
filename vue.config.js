@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/component-generator'
+  publicPath: process.env.NODE_ENV === 'production' ? '/cpcg/' : '/'
 }
