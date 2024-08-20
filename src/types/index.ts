@@ -16,3 +16,8 @@ export type InputGeneratorType = SchemaInputType & {
 export type FormSchemaType = {
   rows: SchemaInputType[][]
 }
+
+export type FileType = {
+  filename: string
+  content: string
+}

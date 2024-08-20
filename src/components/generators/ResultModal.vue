@@ -15,37 +15,36 @@ import {
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ref } from 'vue'
+import Editor from './Editor.vue'
+import type { FileType } from '@/types'
 
 const props = defineProps<{
-  onGenerate: () => ({ vueCode: string, reactCode: string })
+  onGenerate: () => { vueFiles: FileType[]; reactFiles: FileType[] }
 }>()
 
 const openedTab = ref<'react' | 'vue'>('vue')
-const vueCode = ref('')
-const reactCode = ref('')
-
+const vueFiles = ref()
+const reactFiles = ref()
 
 const handleGenerate = () => {
-  const code = props.onGenerate();
-  vueCode.value = code.vueCode
-  reactCode.value = code.reactCode
+  const code = props.onGenerate()
+  vueFiles.value = code.vueFiles
+  reactFiles.value = code.reactFiles
 }
 
-const handleCopy = () => {
-  const texts = {
-    vue: vueCode.value,
-    react: reactCode.value
-  }
-  navigator.clipboard.writeText(texts[openedTab.value]).catch((e) => console.error(e))
-}
+// const handleCopy = () => {
+//   const texts = {
+//     vue: vueFiles.value,
+//     react: reactFiles.value
+//   }
+//   navigator.clipboard.writeText(texts[openedTab.value]).catch((e) => console.error(e))
+// }
 </script>
 
 <template>
   <AlertDialog>
     <AlertDialogTrigger>
-      <Button @click="handleGenerate">
-        <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate
-      </Button>
+      <Button @click="handleGenerate"> <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate </Button>
 
       <AlertDialogContent class="max-w-[95vw] w-fit">
         <Tabs default-value="vue" v-model="openedTab">
@@ -55,28 +54,22 @@ const handleCopy = () => {
               <TabsTrigger value="react" class="w-full"> React.js </TabsTrigger>
             </TabsList>
             <!-- <AlertDialogTitle>Here is your Vue.js code</AlertDialogTitle> -->
-            <AlertDialogDescription class="h-[80vh] overflow-y-scroll thin-scrollbar pr-3">
-              <TabsContent value="vue">
-                <pre class="text-green-600">
-                    {{ vueCode }}
-                </pre>
+            <AlertDialogDescription class="h-[80vh] overflow-y-scroll thin-scrollbar pr-3 mb-3">
+              <TabsContent value="vue" class="grid gap-5">
+                <Editor v-for="file in vueFiles" :code="file.content" :key="file.name" />
               </TabsContent>
-              <TabsContent value="react">
-                <pre class="text-green-600">
-                    {{ reactCode }}
-                </pre>
+              <TabsContent value="react" class="grid gap-5">
+                <Editor v-for="file in reactFiles" :code="file.content" :key="file.name" />
               </TabsContent>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel> Close </AlertDialogCancel>
-            <Button>
+            <!-- <Button>
               <AlertDialogAction>
-                <Button @click="handleCopy">
-                  <Clipboard class="size-4 mr-1" /> Copy
-                </Button>
+                <Button @click="handleCopy"> <Clipboard class="size-4 mr-1" /> Copy </Button>
               </AlertDialogAction>
-            </Button>
+            </Button> -->
           </AlertDialogFooter>
         </Tabs>
       </AlertDialogContent>

@@ -1,7 +1,14 @@
-import type { FormSchemaType } from '@/types'
+import type { FileType, FormSchemaType } from '@/types'
 
 const generateFormCode = (formSchema: FormSchemaType) => {
-  let vueCode = `
+  return {
+    vueFiles: generateVueCode(formSchema),
+    reactFiles: generateReactCode(formSchema)
+  }
+}
+
+const generateVueCode = (formSchema: FormSchemaType) => {
+  let formCode = `
   \<script setup lan="ts"\>
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
@@ -19,28 +26,38 @@ const generateFormCode = (formSchema: FormSchemaType) => {
   }
 
   formSchema.rows.forEach((row) => {
-    vueCode += `
+    formCode += `
     <div class="grid gap-2 grid-cols-${row.length}">`
     row.forEach((field) => {
-      vueCode += `   
+      formCode += `   
       <div class="grid gap-1">
         <Label for="${field.name}">${field.label}</Label>
         <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" />
       </div>
     `
     })
-    vueCode += `</div>
+    formCode += `</div>
   `
   })
 
-  vueCode += `
+  formCode += `
   
     <Button>Submit</Button>
   </form>
   \</template\>
 `
+  const files: FileType[] = [
+    {
+      filename: 'Form.vue',
+      content: formCode
+    }
+  ]
 
-  let reactCode = `
+  return files
+}
+
+const generateReactCode = (formSchema: FormSchemaType) => {
+  let formCode = `
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -51,11 +68,11 @@ const GeneratedForm = () => {
 `
 
   formSchema.rows.forEach((row) => {
-    reactCode += `
+    formCode += `
       <div className="grid gap-2 grid-cols-${row.length}">`
 
     row.forEach((field) => {
-      reactCode += `
+      formCode += `
         <div className="grid gap-1">
           <Label htmlFor="${field.name}">${field.label}</Label>
           <Input type="${field.type}" name="${field.name}" id="${field.name}" />
@@ -64,18 +81,22 @@ const GeneratedForm = () => {
     })
   })
 
-  reactCode += `</div>`
+  formCode += `</div>`
 
-  reactCode += `
+  formCode += `
         <Button>Submit</Button>
     </form>
     );
 }`
 
-  return {
-    vueCode,
-    reactCode
-  }
+  const files = [
+    {
+      filename: 'Form.tsx',
+      content: formCode
+    }
+  ]
+
+  return files
 }
 
 export default generateFormCode
