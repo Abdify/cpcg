@@ -23,8 +23,8 @@ const props = defineProps<{
 }>()
 
 const openedTab = ref<'react' | 'vue'>('vue')
-const vueFiles = ref()
-const reactFiles = ref()
+const vueFiles = ref<FileType[]>()
+const reactFiles = ref<FileType[]>()
 
 const handleGenerate = () => {
   const code = props.onGenerate()
@@ -32,13 +32,7 @@ const handleGenerate = () => {
   reactFiles.value = code.reactFiles
 }
 
-// const handleCopy = () => {
-//   const texts = {
-//     vue: vueFiles.value,
-//     react: reactFiles.value
-//   }
-//   navigator.clipboard.writeText(texts[openedTab.value]).catch((e) => console.error(e))
-// }
+
 </script>
 
 <template>
@@ -53,23 +47,21 @@ const handleGenerate = () => {
               <TabsTrigger value="vue" class="w-full"> Vue.js </TabsTrigger>
               <TabsTrigger value="react" class="w-full"> React.js </TabsTrigger>
             </TabsList>
-            <!-- <AlertDialogTitle>Here is your Vue.js code</AlertDialogTitle> -->
             <AlertDialogDescription class="h-[80vh] overflow-y-scroll thin-scrollbar pr-3 mb-3">
               <TabsContent value="vue" class="grid gap-5">
-                <Editor v-for="file in vueFiles" :code="file.content" :key="file.name" />
+                <div  v-for="file in vueFiles" >
+                  <p class="px-1">{{ file.filename }}</p>
+                  <Editor :code="file.content" :key="file.filename" :language="file.language" />
+
+                </div>
               </TabsContent>
               <TabsContent value="react" class="grid gap-5">
-                <Editor v-for="file in reactFiles" :code="file.content" :key="file.name" />
+                <Editor v-for="file in reactFiles" :code="file.content" :key="file.filename" />
               </TabsContent>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel> Close </AlertDialogCancel>
-            <!-- <Button>
-              <AlertDialogAction>
-                <Button @click="handleCopy"> <Clipboard class="size-4 mr-1" /> Copy </Button>
-              </AlertDialogAction>
-            </Button> -->
           </AlertDialogFooter>
         </Tabs>
       </AlertDialogContent>

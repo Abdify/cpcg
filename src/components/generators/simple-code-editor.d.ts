@@ -3,7 +3,7 @@ declare module 'simple-code-editor' {
 
   const SimpleCodeEditor: DefineComponent<{
     modelValue: string
-    lang?: string
+    languages?: [string, string?][]
     theme?: string
     readOnly?: boolean
     wrap?: boolean

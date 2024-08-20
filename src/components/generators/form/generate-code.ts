@@ -8,7 +8,7 @@ const generateFormCode = (formSchema: FormSchemaType) => {
 }
 
 const generateVueCode = (formSchema: FormSchemaType) => {
-  let formCode = `
+  let myFormCode = `
   \<script setup lan="ts"\>
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
@@ -26,30 +26,32 @@ const generateVueCode = (formSchema: FormSchemaType) => {
   }
 
   formSchema.rows.forEach((row) => {
-    formCode += `
+    myFormCode += `
     <div class="grid gap-2 grid-cols-${row.length}">`
     row.forEach((field) => {
-      formCode += `   
+      myFormCode += `   
       <div class="grid gap-1">
         <Label for="${field.name}">${field.label}</Label>
         <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" />
       </div>
     `
     })
-    formCode += `</div>
+    myFormCode += `</div>
   `
   })
 
-  formCode += `
+  myFormCode += `
   
     <Button>Submit</Button>
   </form>
   \</template\>
 `
+
   const files: FileType[] = [
     {
-      filename: 'Form.vue',
-      content: formCode
+      filename: 'MyForm.vue',
+      content: myFormCode,
+      language: ['ts']
     }
   ]
 
@@ -89,10 +91,11 @@ const GeneratedForm = () => {
     );
 }`
 
-  const files = [
+  const files: FileType[] = [
     {
       filename: 'Form.tsx',
-      content: formCode
+      content: formCode,
+      language: ['tsx']
     }
   ]
 

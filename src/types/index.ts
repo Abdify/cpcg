@@ -20,4 +20,5 @@ export type FormSchemaType = {
 export type FileType = {
   filename: string
   content: string
+  language: [string, string?]
 }
