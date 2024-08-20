@@ -2,11 +2,11 @@
 import { defineAsyncComponent, ref } from 'vue'
 import DynamicForm from './DynamicForm.vue'
 import { Button } from '@/components/ui/button'
-import { ChevronsUpDown, PlusCircle } from 'lucide-vue-next'
+import { ChevronsUpDown, PlaneTakeoff, PlusCircle } from 'lucide-vue-next'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import type { InputGeneratorType, FormSchemaType } from '@/types'
+import type { InputGeneratorType, FormSchemaType, FileType } from '@/types'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 // @ts-ignore
 import FormPresets from '@/components/generators/form/FormPresets.vue'
@@ -50,14 +50,21 @@ const handleRemoveInput = (position: { row: number; column: number }) => {
   }
 }
 
-const handleGenerateCode = () => generateFormCode(formSchema.value)
-
 const handleJsonBlur = (event: Event) => {
   try {
     formSchema.value = JSON.parse((event.target as HTMLTextAreaElement).value)
   } catch (error) {
     jsonError.value = (error as Error).message
   }
+}
+
+const vueFiles = ref<FileType[]>()
+const reactFiles = ref<FileType[]>()
+
+const handleGenerate = () => {
+  const code = generateFormCode(formSchema.value)
+  vueFiles.value = code.vueFiles
+  reactFiles.value = code.reactFiles
 }
 </script>
 
@@ -148,7 +155,9 @@ const handleJsonBlur = (event: Event) => {
 
       <hr class="mt-5" />
 
-      <ResultModal :on-generate="handleGenerateCode" />
+      <ResultModal :vue-files="vueFiles" :react-files="reactFiles">
+        <Button @click="handleGenerate"> <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate </Button>
+      </ResultModal>
     </section>
 
     <section class="w-full">
