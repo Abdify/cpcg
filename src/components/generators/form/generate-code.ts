@@ -8,7 +8,7 @@ const generateFormCode = (formSchema: FormSchemaType) => {
 }
 
 const generateVueCode = (formSchema: FormSchemaType) => {
-  let myFormCode = `
+  let generatedFormCode = `
   \<script setup lan="ts"\>
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
@@ -26,21 +26,21 @@ const generateVueCode = (formSchema: FormSchemaType) => {
   }
 
   formSchema.rows.forEach((row) => {
-    myFormCode += `
+    generatedFormCode += `
     <div class="grid gap-2 grid-cols-${row.length}">`
     row.forEach((field) => {
-      myFormCode += `   
+      generatedFormCode += `   
       <div class="grid gap-1">
         <Label for="${field.name}">${field.label}</Label>
         <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" />
       </div>
     `
     })
-    myFormCode += `</div>
+    generatedFormCode += `</div>
   `
   })
 
-  myFormCode += `
+  generatedFormCode += `
   
     <Button>Submit</Button>
   </form>
@@ -49,9 +49,19 @@ const generateVueCode = (formSchema: FormSchemaType) => {
 
   const files: FileType[] = [
     {
-      filename: 'MyForm.vue',
-      content: myFormCode,
-      language: ['ts']
+      filename: 'GeneratedForm.vue',
+      content: generatedFormCode,
+      language: ['ts'],
+      commands: [
+        'npx shadcn-vue@latest add input',
+        'npx shadcn-vue@latest add label',
+        'npx shadcn-vue@latest add button'
+      ]
+    },
+    {
+      filename: 'Form.vue',
+      content: '',
+      language: ['tsx']
     }
   ]
 
@@ -59,7 +69,7 @@ const generateVueCode = (formSchema: FormSchemaType) => {
 }
 
 const generateReactCode = (formSchema: FormSchemaType) => {
-  let formCode = `
+  let generatedFormCode = `
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -70,11 +80,11 @@ const GeneratedForm = () => {
 `
 
   formSchema.rows.forEach((row) => {
-    formCode += `
+    generatedFormCode += `
       <div className="grid gap-2 grid-cols-${row.length}">`
 
     row.forEach((field) => {
-      formCode += `
+      generatedFormCode += `
         <div className="grid gap-1">
           <Label htmlFor="${field.name}">${field.label}</Label>
           <Input type="${field.type}" name="${field.name}" id="${field.name}" />
@@ -83,9 +93,9 @@ const GeneratedForm = () => {
     })
   })
 
-  formCode += `</div>`
+  generatedFormCode += `</div>`
 
-  formCode += `
+  generatedFormCode += `
         <Button>Submit</Button>
     </form>
     );
@@ -93,9 +103,14 @@ const GeneratedForm = () => {
 
   const files: FileType[] = [
     {
-      filename: 'Form.tsx',
-      content: formCode,
-      language: ['tsx']
+      filename: 'GeneratedForm.tsx',
+      content: generatedFormCode,
+      language: ['tsx'],
+      commands: [
+        'npx shadcn-ui@latest add input',
+        'npx shadcn-ui@latest add label',
+        'npx shadcn-ui@latest add button'
+      ]
     }
   ]
 
