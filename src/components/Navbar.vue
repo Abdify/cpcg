@@ -31,8 +31,8 @@ const components: { title: string; href: string; description: string }[] = [
       'Create complex and beautiful forms in Vue.js and React.js without writing any code!'
   },
   {
-    title: 'Progress',
-    href: '/docs/primitives/progress',
+    title: 'Nav Generator',
+    href: '/generators/nav',
     description:
       'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.'
   },
