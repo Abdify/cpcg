@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import type { FileType, NavSchemaType, NavItemType } from '@/types'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import FormPresets from '@/components/generators/form/FormPresets.vue'
 import { getInputDefaultValue, getNavInputDefaultValue, navSchemaDefaultValue } from './form-data'
 import generateFormCode from './generate-code'
 import { SkeletonCard } from '@/components/ui/skeleton'
@@ -70,6 +69,13 @@ const handleGenerate = () => {
   // vueFiles.value = code.vueFiles
   // reactFiles.value = code.reactFiles
 }
+
+const handleAddColumn = () => {
+  navSchema.value.columns.push({
+    items: [],
+  })
+}
+
 </script>
 
 <template>
@@ -80,33 +86,9 @@ const handleGenerate = () => {
 
   <ResizablePanel :default-size="20" :min-size="10">
     <section class="h-full p-5 grid gap-5">
-      <h3 class="font-bold">Insert An Input</h3>
+      <Button variant="outline" type="button" @click="handleAddColumn" > <PlusCircle class="size-4 mr-1" /> Add Column </Button>
       <form class="grid gap-2" >
-        <Label class="font-semibold">Input Type</Label>
-        <RadioGroup default-value="text" v-model="input.type">
-          <div class="flex items-center space-x-2">
-            <RadioGroupItem id="type-text" value="text" />
-            <Label for="type-text">Text</Label>
-          </div>
-          <div class="flex items-center space-x-2">
-            <RadioGroupItem id="type-email" value="email" />
-            <Label for="type-email">Email</Label>
-          </div>
-          <div class="flex items-center space-x-2">
-            <RadioGroupItem id="type-password" value="password" />
-            <Label for="type-password">Password</Label>
-          </div>
-          <div class="flex items-center space-x-2">
-            <RadioGroupItem id="type-radio" value="radio" />
-            <Label for="type-radio">Radio</Label>
-          </div>
-        </RadioGroup>
-
-        <hr />
-
-        
-
-        <Button variant="outline"> <PlusCircle class="size-4 mr-1" /> Add Item </Button>
+        <!-- <Input  /> -->
       </form>
 
       <hr />
@@ -153,5 +135,4 @@ const handleGenerate = () => {
 
   <hr class="mt-5" />
 
-  <FormPresets />
 </template>
