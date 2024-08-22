@@ -5,52 +5,58 @@ import { ChevronsUpDown, PlaneTakeoff, PlusCircle } from 'lucide-vue-next'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import type { InputGeneratorType, FormSchemaType, FileType } from '@/types'
+import type { FileType, NavSchemaType, NavItemType } from '@/types'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import FormPresets from '@/components/generators/form/FormPresets.vue'
-import { getInputDefaultValue, formSchemaDefaultValue } from './form-data'
+import { getInputDefaultValue, getNavInputDefaultValue, navSchemaDefaultValue } from './form-data'
 import generateFormCode from './generate-code'
 import { SkeletonCard } from '@/components/ui/skeleton'
+import NavGeneratorPreview from './NavGeneratorPreview.vue'
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable'
 
 const ResultModal = defineAsyncComponent({
   loader: () => import('../ResultModal.vue'),
   loadingComponent: SkeletonCard
 })
 
-const formSchema = ref<FormSchemaType>(formSchemaDefaultValue)
+const navSchema = ref<NavSchemaType>(navSchemaDefaultValue)
 
 const jsonError = ref('')
 
-const input = ref<InputGeneratorType>(getInputDefaultValue(formSchema.value))
+const input = ref<NavItemType>(getNavInputDefaultValue())
 
-const handleAddInput = (e: Event) => {
-  e.preventDefault()
-  jsonError.value = ''
+// const handleAddInput = (e: Event) => {
+//   e.preventDefault()
+//   jsonError.value = ''
 
-  const { position, ...rest } = input.value
-  const row = formSchema.value.rows[position.row - 1]
-  if (row) {
-    if (position.column > row.length + 1) {
-      return alert('Invalid column')
-    }
-    row[position.column - 1] = rest
-  } else {
-    formSchema.value.rows.push([rest])
-  }
+//   const { position, ...rest } = input.value
+//   const row = navSchema.value.rows[position.row - 1]
+//   if (row) {
+//     if (position.column > row.length + 1) {
+//       return alert('Invalid column')
+//     }
+//     row[position.column - 1] = rest
+//   } else {
+//     navSchema.value.rows.push([rest])
+//   }
 
-  input.value = getInputDefaultValue(formSchema.value)
-}
+//   input.value = getInputDefaultValue(navSchema.value)
+// }
 
-const handleRemoveInput = (position: { row: number; column: number }) => {
-  const row = formSchema.value.rows[position.row - 1]
-  if (row && row[position.column - 1]) {
-    row.splice(position.column - 1, 1)
-  }
-}
+// const handleRemoveInput = (position: { row: number; column: number }) => {
+//   const row = navSchema.value.rows[position.row - 1]
+//   if (row && row[position.column - 1]) {
+//     row.splice(position.column - 1, 1)
+//   }
+// }
 
 const handleJsonBlur = (event: Event) => {
   try {
-    formSchema.value = JSON.parse((event.target as HTMLTextAreaElement).value)
+    navSchema.value = JSON.parse((event.target as HTMLTextAreaElement).value)
   } catch (error) {
     jsonError.value = (error as Error).message
   }
@@ -60,17 +66,22 @@ const vueFiles = ref<FileType[]>()
 const reactFiles = ref<FileType[]>()
 
 const handleGenerate = () => {
-  const code = generateFormCode(formSchema.value)
-  vueFiles.value = code.vueFiles
-  reactFiles.value = code.reactFiles
+  // const code = generateFormCode(navSchema.value)
+  // vueFiles.value = code.vueFiles
+  // reactFiles.value = code.reactFiles
 }
 </script>
 
 <template>
   <div class="flex gap-5 items-start">
-    <section class="h-full w-96 shadow p-5 grid gap-5">
+  <ResizablePanelGroup direction="horizontal">
+    
+  
+
+  <ResizablePanel :default-size="20" :min-size="10">
+    <section class="h-full p-5 grid gap-5">
       <h3 class="font-bold">Insert An Input</h3>
-      <form class="grid gap-2" @submit="handleAddInput">
+      <form class="grid gap-2" >
         <Label class="font-semibold">Input Type</Label>
         <RadioGroup default-value="text" v-model="input.type">
           <div class="flex items-center space-x-2">
@@ -93,40 +104,9 @@ const handleGenerate = () => {
 
         <hr />
 
-        <Label class="font-semibold">Input As</Label>
-        <RadioGroup default-value="input" v-model="input.as">
-          <div class="flex items-center space-x-2">
-            <RadioGroupItem id="as-input" value="input" />
-            <Label for="as-input">Input</Label>
-          </div>
-          <div class="flex items-center space-x-2">
-            <RadioGroupItem id="as-textarea" value="textarea" :disabled="input.type !== 'text'" />
-            <Label for="as-textarea">Textarea</Label>
-          </div>
-        </RadioGroup>
+        
 
-        <hr />
-
-        <Label class="font-semibold">Meta Data</Label>
-        <Input placeholder="Name" v-model="input.name" required />
-        <Input placeholder="Label" v-model="input.label" />
-        <Input placeholder="Placeholder" v-model="input.placeholder" />
-
-        <hr />
-
-        <Label class="font-semibold">Position</Label>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <Label>Row</Label>
-            <Input class="ml-auto" placeholder="Row" v-model="input.position.row" />
-          </div>
-          <div>
-            <Label>Column</Label>
-            <Input class="ml-auto" placeholder="Column" v-model="input.position.column" />
-          </div>
-        </div>
-
-        <Button variant="outline"> <PlusCircle class="size-4 mr-1" /> Add Input </Button>
+        <Button variant="outline"> <PlusCircle class="size-4 mr-1" /> Add Item </Button>
       </form>
 
       <hr />
@@ -144,7 +124,7 @@ const handleGenerate = () => {
         <CollapsibleContent>
           <textarea
             class="h-[600px] w-full"
-            :value="JSON.stringify(formSchema, null, 4)"
+            :value="JSON.stringify(navSchema, null, 4)"
             @blur="handleJsonBlur"
           ></textarea>
           <p class="text-red-500">{{ jsonError }}</p>
@@ -157,10 +137,18 @@ const handleGenerate = () => {
         <Button @click="handleGenerate"> <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate </Button>
       </ResultModal>
     </section>
+    </ResizablePanel>
+    
 
-    <section class="w-full">
-      <DynamicForm :schema="formSchema" :remove-field="handleRemoveInput" />
-    </section>
+    <ResizableHandle with-handle />
+
+    <ResizablePanel>
+      <section class="w-full px-5">
+        <NavGeneratorPreview :schema="navSchema" />
+      </section>
+    </ResizablePanel>
+
+    </ResizablePanelGroup>
   </div>
 
   <hr class="mt-5" />
