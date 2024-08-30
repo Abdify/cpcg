@@ -56,14 +56,14 @@ const components: { title: string; href: string; description: string }[] = [
 ]
 </script>
 <template>
-  <div class="font-sans antialiased bg-teal-500">
+  <div class="font-sans antialiased">
     <nav class="container flex items-center justify-between flex-wrap px-6 py-3 gap-10">
-      <RouterLink to="/" class="text-white">
+      <RouterLink to="/">
         <div class="flex items-center gap-1">
           <PlaneTakeoff />
           <h1 class="font-semibold text-xl tracking-tight">CPCG</h1>
         </div>
-        <span class="text-muted text-sm">Cross Platform Component Generator</span>
+        <span class="text-gray-500 text-sm">Cross Platform Component Generator</span>
       </RouterLink>
       <div class="block sm:hidden">
         <button @click="toggle"
@@ -75,7 +75,7 @@ const components: { title: string; href: string; description: string }[] = [
         </button>
       </div>
 
-      <div :class="open ? 'block' : 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto text-white">
+      <div :class="open ? 'block' : 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>

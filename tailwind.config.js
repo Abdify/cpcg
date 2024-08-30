@@ -1,5 +1,6 @@
 const animate = require('tailwindcss-animate')
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -29,14 +30,9 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
-          'dark-blue': 'hsl(233, 26%, 24%)',
-          'lime-green': 'hsl(136, 65%, 51%)',
-          'bright-cyan': 'hsl(192, 70%, 51%)'
+          ...colors.indigo
         },
         neutral: {
-          'grayish-blue': 'hsl(233, 8%, 62%)',
-          'light-grayish-blue': 'hsl(220, 16%, 96%)',
-          'very-light-gray': 'hsl(0, 0%, 98%)',
           white: 'hsl(0, 0%, 100%)'
         },
         secondary: {
@@ -62,7 +58,12 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
-        }
+        },
+
+        warning: colors.amber,
+        success: colors.emerald,
+        danger: colors.rose,
+        info: colors.cyan
       },
 
       borderRadius: {

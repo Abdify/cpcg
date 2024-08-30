@@ -4,7 +4,7 @@ import { Icon } from '@iconify/vue';
 
 <template>
     <div class="my-24">
-        <h2 class="text-center text-slate-500">Generate components for your favorite framework to copy-paste</h2>
+        <h2 class="text-center text-slate-500">Generate components for your favorite framework to copy & paste</h2>
         <div class="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
             <div class="flex items-center gap-3 animate-pulse tech-icon">
                 <Icon class="h-12 w-12 md:h-14" icon="simple-icons:vuedotjs" />
