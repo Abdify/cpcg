@@ -1,4 +1,13 @@
+import type { FileType } from '@/types'
+
 const generateGridCode = (nItems: number, nColumns: number, colSpans: number[]) => {
+  return {
+    vueFiles: generateVueCode(nItems, nColumns, colSpans),
+    reactFiles: generateReactCode(nItems, nColumns, colSpans)
+  }
+}
+
+const generateVueCode = (nItems: number, nColumns: number, colSpans: number[]) => {
   const vueCode = `
 <template>
     <div class="grid grid-cols-${nColumns} gap-5">
@@ -15,6 +24,17 @@ const generateGridCode = (nItems: number, nColumns: number, colSpans: number[]) 
     </div>
 </template>
 `
+  const vueFiles: FileType[] = [
+    {
+      filename: 'GeneratedGrid.vue',
+      content: vueCode,
+      language: ['ts']
+    }
+  ]
+  return vueFiles
+}
+
+const generateReactCode = (nItems: number, nColumns: number, colSpans: number[]) => {
   const reactCode = `
 return (
     <div className="grid grid-cols-${nColumns} gap-5">
@@ -31,7 +51,16 @@ return (
     </div>
 )
 `
-  return { vueCode: vueCode, reactCode: reactCode }
+
+  const reactFiles: FileType[] = [
+    {
+      filename: 'GeneratedGrid.ts',
+      content: reactCode,
+      language: ['tsx']
+    }
+  ]
+
+  return reactFiles
 }
 
 export default generateGridCode

@@ -4,6 +4,9 @@ import { ref } from 'vue'
 import generateGridCode from './generate-code'
 import { cn } from '@/lib/utils'
 import ResultModal from '../ResultModal.vue'
+import { Button } from '@/components/ui/button'
+import { PlaneTakeoff } from 'lucide-vue-next'
+import type { FileType } from '@/types'
 
 const nItems = ref([6])
 const colSpans = ref<number[]>([])
@@ -17,8 +20,14 @@ const handleSelect = (selectedItem: number) => {
   selected.value = undefined
 }
 
-const handleGenerate = () => generateGridCode(nItems.value[0], nColumns.value[0], colSpans.value)
+const vueFiles = ref<FileType[]>()
+const reactFiles = ref<FileType[]>()
 
+const handleGenerate = () => {
+  const code = generateGridCode(nItems.value[0], nColumns.value[0], colSpans.value)
+  vueFiles.value = code.vueFiles
+  reactFiles.value = code.reactFiles
+}
 </script>
 
 <template>
@@ -35,7 +44,9 @@ const handleGenerate = () => generateGridCode(nItems.value[0], nColumns.value[0]
         <Slider :default-value="[6]" :max="20" :step="1" lab v-model="nColumns" />
       </div>
 
-      <ResultModal :on-generate="handleGenerate" />
+      <ResultModal :vue-files="vueFiles" :react-files="reactFiles">
+        <Button @click="handleGenerate"> <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate </Button>
+      </ResultModal>
     </section>
 
     <!-- Result -->
