@@ -1,5 +1,3 @@
-import type { Home } from 'lucide-vue-next'
-
 export type SchemaInputType = {
   label: string
   name: string
@@ -17,6 +15,9 @@ export type InputGeneratorType = SchemaInputType & {
 
 export type FormSchemaType = {
   rows: SchemaInputType[][]
+  title?: string
+  description?: string
+  buttonText?: string
 }
 
 export type FileType = {
@@ -30,7 +31,7 @@ export type NavItemType = {
   type: 'link' | 'dropdown' | 'search'
   link?: string
   ui: {
-    icon?: typeof Home
+    icon?: string
     container?: boolean
     class?: string
     text?: string
@@ -47,4 +48,10 @@ export type NavColumnType = {
 export type NavSchemaType = {
   columns: NavColumnType[]
   class?: string
+}
+
+export type GridSchemaType = {
+  nItems: number[]
+  nColumns: number[]
+  colSpans: Record<number, number>
 }

@@ -59,7 +59,7 @@ export const getNavInputDefaultValue = (): NavItemType => ({
   type: 'link',
   link: '/',
   ui: {
-    icon: Home,
+    icon: 'mdi:home',
     container: false,
     class: 'logo'
   },
@@ -74,7 +74,7 @@ export const navSchemaDefaultValue: NavSchemaType = {
           type: 'link',
           link: '/',
           ui: {
-            icon: AxeIcon,
+            icon: 'simple-icons:zendesk',
             container: false,
             class: 'logo',
             text: 'Company Name'
@@ -98,7 +98,7 @@ export const navSchemaDefaultValue: NavSchemaType = {
         {
           type: 'dropdown',
           ui: {
-            icon: CopyPlus,
+            icon: 'mdi:chevron-down',
             container: true,
             text: 'Copy'
           },
@@ -130,7 +130,7 @@ export const navSchemaDefaultValue: NavSchemaType = {
           type: 'link',
           link: '/copy',
           ui: {
-            icon: User,
+            icon: 'mdi:account',
             container: true
             // text: 'User'
           }
@@ -139,7 +139,7 @@ export const navSchemaDefaultValue: NavSchemaType = {
           type: 'link',
           link: '/docs',
           ui: {
-            icon: Paperclip,
+            icon: 'mdi:paperclip',
             container: true
             // text: 'Docs'
           }
@@ -148,7 +148,7 @@ export const navSchemaDefaultValue: NavSchemaType = {
           type: 'link',
           link: '/blog',
           ui: {
-            icon: BluetoothOff,
+            icon: 'mdi:bluetooth-off',
             container: true
             // text: 'Blog'
           }

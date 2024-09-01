@@ -1,13 +1,13 @@
 import type { FileType } from '@/types'
 
-const generateGridCode = (nItems: number, nColumns: number, colSpans: number[]) => {
+const generateGridCode = (nItems: number, nColumns: number, colSpans: Record<number, number>) => {
   return {
     vueFiles: generateVueCode(nItems, nColumns, colSpans),
     reactFiles: generateReactCode(nItems, nColumns, colSpans)
   }
 }
 
-const generateVueCode = (nItems: number, nColumns: number, colSpans: number[]) => {
+const generateVueCode = (nItems: number, nColumns: number, colSpans: Record<number, number>) => {
   const vueCode = `
 <template>
     <div class="grid grid-cols-${nColumns} gap-5">
@@ -34,7 +34,7 @@ const generateVueCode = (nItems: number, nColumns: number, colSpans: number[]) =
   return vueFiles
 }
 
-const generateReactCode = (nItems: number, nColumns: number, colSpans: number[]) => {
+const generateReactCode = (nItems: number, nColumns: number, colSpans: Record<number, number>) => {
   const reactCode = `
 return (
     <div className="grid grid-cols-${nColumns} gap-5">

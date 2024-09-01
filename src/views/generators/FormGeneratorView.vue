@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FormGenerator from '@/components/generators/form/FormGenerator.vue'
+import FormGenerator from '@/components/generators/form/index.vue'
 </script>
 
 <template>

@@ -20,6 +20,9 @@ export const getInputDefaultValue = (
 })
 
 export const formSchemaDefaultValue: FormSchemaType = {
+  title: 'Signup',
+  description: 'Please fill out this form to create a new account.',
+  buttonText: 'Sign Up',
   rows: [
     [
       {

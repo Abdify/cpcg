@@ -20,7 +20,7 @@ const toggle = () => {
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: 'Grid Layout',
+    title: 'Grid Generator',
     href: '/generators/grid',
     description: 'Create complex grid layout in Vue.js and React.js without writing any code!'
   },
@@ -34,22 +34,22 @@ const components: { title: string; href: string; description: string }[] = [
     title: 'Nav Generator',
     href: '/generators/nav',
     description:
-      'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.'
+      'Create customized navbar according to your needs'
   },
   {
-    title: 'Scroll-area',
-    href: '/docs/primitives/scroll-area',
+    title: 'Sidebar Generator',
+    href: '/generators/sidebar',
     description: 'Visually or semantically separates content.'
   },
   {
-    title: 'Tabs',
-    href: '/docs/primitives/tabs',
+    title: 'Footer Generator',
+    href: '/generators/footer',
     description:
       'A set of layered sections of content—known as tab panels—that are displayed one at a time.'
   },
   {
-    title: 'Tooltip',
-    href: '/docs/primitives/tooltip',
+    title: 'Table Generator',
+    href: '/generators/table',
     description:
       'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.'
   }

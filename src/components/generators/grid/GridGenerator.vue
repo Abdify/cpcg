@@ -6,17 +6,20 @@ import { cn } from '@/lib/utils'
 import ResultModal from '../ResultModal.vue'
 import { Button } from '@/components/ui/button'
 import { PlaneTakeoff } from 'lucide-vue-next'
-import type { FileType } from '@/types'
+import type { FileType, GridSchemaType } from '@/types'
 
-const nItems = ref([6])
-const colSpans = ref<number[]>([])
-const nColumns = ref([6])
 const selected = ref<number>()
+
+const gridSchema = ref<GridSchemaType>({
+  nItems: [6],
+  nColumns: [6],
+  colSpans: {},
+})
 
 const handleSelect = (selectedItem: number) => {
   if (!selected.value) return (selected.value = selectedItem)
 
-  colSpans.value[selected.value] = selectedItem + 1 - selected.value
+  gridSchema.value.colSpans[selected.value] = selectedItem + 1 - selected.value
   selected.value = undefined
 }
 
@@ -24,7 +27,7 @@ const vueFiles = ref<FileType[]>()
 const reactFiles = ref<FileType[]>()
 
 const handleGenerate = () => {
-  const code = generateGridCode(nItems.value[0], nColumns.value[0], colSpans.value)
+  const code = generateGridCode(gridSchema.value.nItems[0], gridSchema.value.nColumns[0], gridSchema.value.colSpans)
   vueFiles.value = code.vueFiles
   reactFiles.value = code.reactFiles
 }
@@ -35,29 +38,31 @@ const handleGenerate = () => {
     <!-- Options -->
     <section class="h-full w-96 shadow p-5 grid gap-5">
       <div>
-        <p>Number of Items: {{ nItems }}</p>
-        <Slider :default-value="[6]" :max="100" :step="1" lab v-model="nItems" />
+        <p>Number of Items: {{ gridSchema.nItems }}</p>
+        <Slider :default-value="[6]" :max="100" :step="1" lab v-model="gridSchema.nItems" />
       </div>
 
       <div>
-        <p>Number of Columns: {{ nColumns }}</p>
-        <Slider :default-value="[6]" :max="20" :step="1" lab v-model="nColumns" />
+        <p>Number of Columns: {{ gridSchema.nColumns }}</p>
+        <Slider :default-value="[6]" :max="20" :step="1" lab v-model="gridSchema.nColumns" />
       </div>
 
       <ResultModal :vue-files="vueFiles" :react-files="reactFiles">
-        <Button @click="handleGenerate"> <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate </Button>
+        <Button @click="handleGenerate">
+          <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate
+        </Button>
       </ResultModal>
     </section>
 
     <!-- Result -->
     <section class="w-full">
-      <div class="grid gap-5" :style="{ gridTemplateColumns: `repeat(${nColumns[0]}, 1fr)` }">
-        <div v-for="(item, i) in nItems[0]" :key="item" :class="cn(
+      <div class="grid gap-5" :style="{ gridTemplateColumns: `repeat(${gridSchema.nColumns[0]}, 1fr)` }">
+        <div v-for="(item, i) in gridSchema.nItems[0]" :key="item" :class="cn(
           'bg-gray-200 text-3xl rounded-lg py-8 flex items-center justify-center transition-colors hover:bg-slate-300',
           selected && '',
           item === selected && 'bg-slate-500 hover:bg-slate-500'
         )
-          " :style="{ gridColumn: `span ${colSpans[item] ?? 1} / span ${colSpans[item] ?? 1}` }"
+          " :style="{ gridColumn: `span ${gridSchema.colSpans[item] ?? 1} / span ${gridSchema.colSpans[item] ?? 1}` }"
           @click="handleSelect(item)">
           {{ item }}
         </div>

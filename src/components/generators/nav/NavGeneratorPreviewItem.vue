@@ -19,6 +19,7 @@ import {
   MenubarTrigger
 } from '@/components/ui/menubar'
 import { Search } from 'lucide-vue-next'
+import { Icon } from '@iconify/vue'
 
 defineProps<{
   item: NavItemType
@@ -27,16 +28,16 @@ defineProps<{
 
 <template>
 
-    <!-- Regular Link Item -->
+  <!-- Regular Link Item -->
   <div v-if="item.type === 'link'" :class="item.ui.class">
     <RouterLink :to="item.link ?? '/'" class="flex items-center gap-1">
       <div :class="cn('p-2 rounded-full', item.ui.container && 'bg-slate-400')">
-        <item.ui.icon class="size-4" />
+        <Icon v-if="item.ui.icon" :icon="item.ui.icon" class="size-4" />
       </div>
       {{ item.ui.text }}
     </RouterLink>
   </div>
-  
+
   <!-- Search Item -->
   <div v-else-if="item.type === 'search'" :class="cn('flex items-center border rounded-lg', item.ui.class)">
     <template v-if="item.ui.button">
@@ -59,7 +60,7 @@ defineProps<{
       <MenubarMenu>
         <MenubarTrigger class="p-0 !bg-transparent">
           <div :class="cn('p-2 rounded-full', item.ui.container && 'bg-slate-400')">
-            <item.ui.icon class="size-4" />
+            <Icon v-if="item.ui.icon" :icon="item.ui.icon" class="size-4" />
           </div>
         </MenubarTrigger>
         <MenubarContent>
@@ -76,7 +77,8 @@ defineProps<{
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
-          <MenubarItem> Print... <MenubarShortcut>⌘P</MenubarShortcut> </MenubarItem>
+          <MenubarItem> Print... <MenubarShortcut>⌘P</MenubarShortcut>
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

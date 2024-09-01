@@ -16,7 +16,11 @@ const generateVueCode = (formSchema: FormSchemaType) => {
   \</script\>
 
 \<template\>
-<form class="grid gap-5 max-w-3xl mx-auto my-5">
+<form class="grid gap-5 min-w-96 max-w-3xl mx-auto my-5">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-800">${formSchema.title}</h1>
+    <p class="text-gray-600">${formSchema.description}</p>
+  </div>
 `
 
   const inputComponent = {
@@ -41,8 +45,7 @@ const generateVueCode = (formSchema: FormSchemaType) => {
   })
 
   generatedFormCode += `
-  
-    <Button>Submit</Button>
+    <Button>${formSchema.buttonText}</Button>
   </form>
   \</template\>
 `
@@ -76,7 +79,11 @@ import { Button } from '@/components/ui/button';
 
 const GeneratedForm = () => {
   return (
-    <form className="grid gap-5 max-w-3xl mx-auto my-5>
+    <form className="grid gap-5 min-w-96 max-w-3xl mx-auto my-5>
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">${formSchema.title}</h1>
+        <p class="text-gray-600">${formSchema.description}</p>
+      </div>
 `
 
   formSchema.rows.forEach((row) => {
@@ -91,12 +98,13 @@ const GeneratedForm = () => {
         </div>
       `
     })
+
+    generatedFormCode += `</div>`
   })
 
-  generatedFormCode += `</div>`
-
   generatedFormCode += `
-        <Button>Submit</Button>
+  
+      <Button>Submit</Button>
     </form>
     );
 }`

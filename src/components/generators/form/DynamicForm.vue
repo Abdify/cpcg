@@ -1,5 +1,9 @@
 <template>
   <Form class="grid gap-5 max-w-3xl border mx-auto border-none my-5">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">{{ schema.title }}</h1>
+      <p class="text-gray-600">{{ schema.description }}</p>
+    </div>
     <div v-for="(row, i) in schema.rows" :key="i" class="grid gap-2"
       :style="{ gridTemplateColumns: `repeat(${row.length}, minmax(0, 1fr))` }">
 
@@ -30,7 +34,7 @@
 
 
     </div>
-    <Button type="button">Submit</Button>
+    <Button type="button">{{ schema.buttonText }}</Button>
   </Form>
 </template>
 <script setup lang="ts">

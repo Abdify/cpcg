@@ -39,8 +39,8 @@ import type { RouterLink } from 'vue-router';
                             <div class="flex gap-3 -mb-5 py-4 border-t border-dashed">
                                 <RouterLink to="/generators/form"
                                     class="group rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 flex gap-1.5 items-center text-sm h-8 px-3.5 justify-center">
-                                    <span>Download</span>
-                                    <Icon icon="mdi:arrow-down" />
+                                    <span>Generate</span>
+                                    <Icon icon="mdi:arrow-right" />
                                 </RouterLink>
                                 <a href="https://github.com/abdify/cpcg" target="_blank" rel="noopener"
                                     class="group flex items-center rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 size-8 justify-center">
@@ -71,8 +71,8 @@ import type { RouterLink } from 'vue-router';
                             <div class="flex gap-3 -mb-5 py-4 border-t border-dashed">
                                 <RouterLink to="/generators/grid"
                                     class="group rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 flex gap-1.5 items-center text-sm h-8 px-3.5 justify-center">
-                                    <span>Download</span>
-                                    <Icon icon="mdi:arrow-down" />
+                                    <span>Generate</span>
+                                    <Icon icon="mdi:arrow-right" />
                                 </RouterLink>
                                 <a href="https://github.com/abdify/cpcg" target="_blank" rel="noopener"
                                     class="group flex items-center rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 size-8 justify-center">
@@ -97,14 +97,13 @@ import type { RouterLink } from 'vue-router';
 
                             <div class="mt-6 pb-6 rounded-b-xl">
                                 <p class="text-gray-700 dark:text-gray-300 font-bold">Nav Generator</p>
-                                <p>Displays an indicator showing the completion progress of a task, typically displayed
-                                    as a progress bar.</p>
+                                <p>Create customized navbar according to your needs</p>
                             </div>
                             <div class="flex gap-3 -mb-5 py-4 border-t border-dashed">
                                 <RouterLink to="/generators/nav"
                                     class="group rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 flex gap-1.5 items-center text-sm h-8 px-3.5 justify-center">
-                                    <span>Download</span>
-                                    <Icon icon="mdi:arrow-down" />
+                                    <span>Generate</span>
+                                    <Icon icon="mdi:arrow-right" />
                                 </RouterLink>
                                 <a href="https://github.com/abdify/cpcg" target="_blank" rel="noopener"
                                     class="group flex items-center rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 size-8 justify-center">
@@ -134,8 +133,8 @@ import type { RouterLink } from 'vue-router';
                             <div class="flex gap-3 -mb-5 py-4 border-t border-dashed">
                                 <RouterLink to="/generators/nav"
                                     class="group rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 flex gap-1.5 items-center text-sm h-8 px-3.5 justify-center">
-                                    <span>Download</span>
-                                    <Icon icon="mdi:arrow-down" />
+                                    <span>Generate</span>
+                                    <Icon icon="mdi:arrow-right" />
                                 </RouterLink>
                                 <a href="https://github.com/abdify/cpcg" target="_blank" rel="noopener"
                                     class="group flex items-center rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 size-8 justify-center">
@@ -165,8 +164,8 @@ import type { RouterLink } from 'vue-router';
                             <div class="flex gap-3 -mb-5 py-4 border-t border-dashed">
                                 <RouterLink to="/generators/form"
                                     class="group rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 flex gap-1.5 items-center text-sm h-8 px-3.5 justify-center">
-                                    <span>Download</span>
-                                    <Icon icon="mdi:arrow-down" />
+                                    <span>Generate</span>
+                                    <Icon icon="mdi:arrow-right" />
                                 </RouterLink>
                                 <a href="https://github.com/abdify/cpcg" target="_blank" rel="noopener"
                                     class="group flex items-center rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 size-8 justify-center">
@@ -196,8 +195,8 @@ import type { RouterLink } from 'vue-router';
                             <div class="flex gap-3 -mb-5 py-4 border-t border-dashed">
                                 <RouterLink to="/generators/form"
                                     class="group rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 flex gap-1.5 items-center text-sm h-8 px-3.5 justify-center">
-                                    <span>Download</span>
-                                    <Icon icon="mdi:arrow-down" />
+                                    <span>Generate</span>
+                                    <Icon icon="mdi:arrow-right" />
                                 </RouterLink>
                                 <a href="https://github.com/abdify/cpcg" target="_blank" rel="noopener"
                                     class="group flex items-center rounded-full disabled:border *:select-none [&>*:not(.sr-only)]:relative *:disabled:opacity-20 disabled:text-gray-950 disabled:border-gray-200 disabled:bg-gray-100 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white text-gray-950 bg-gray-100 hover:bg-gray-200/75 active:bg-gray-100 dark:text-white dark:bg-gray-500/10 dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 size-8 justify-center">
