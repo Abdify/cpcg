@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue'
-import DynamicForm from './DynamicForm.vue'
+import FormPreview from './FormPreview.vue'
 import { Button } from '@/components/ui/button'
-import { ChevronsUpDown, PlaneTakeoff, Plus, PlusCircle, PlusCircleIcon } from 'lucide-vue-next'
+import { PlaneTakeoff, PlusCircle } from 'lucide-vue-next'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import type { InputGeneratorType, FormSchemaType, FileType } from '@/types'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-// @ts-ignore
 import FormPresets from '@/components/generators/form/FormPresets.vue'
 import { getInputDefaultValue, formSchemaDefaultValue } from './form-data'
 import generateFormCode from './generate-code'
@@ -102,7 +100,6 @@ const handleGenerate = () => {
             </TabsList>
 
             <TabsContent value="input" class="grid gap-5">
-
               <form class="grid gap-2" @submit="handleAddInput">
                 <Label class="font-semibold">Input Type</Label>
                 <RadioGroup default-value="text" v-model="input.type">
@@ -121,6 +118,10 @@ const handleGenerate = () => {
                   <div class="flex items-center space-x-2">
                     <RadioGroupItem id="type-radio" value="radio" />
                     <Label for="type-radio">Radio</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="type-checkbox" value="checkbox" />
+                    <Label for="type-checkbox">Checkbox</Label>
                   </div>
                 </RadioGroup>
 
@@ -204,7 +205,7 @@ const handleGenerate = () => {
 
       <ResizablePanel>
         <section class="w-full">
-          <DynamicForm :schema="formSchema" :remove-field="handleRemoveInput" />
+          <FormPreview :schema="formSchema" :remove-field="handleRemoveInput" />
         </section>
       </ResizablePanel>
     </ResizablePanelGroup>

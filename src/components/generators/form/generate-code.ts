@@ -1,5 +1,12 @@
 import type { FileType, FormSchemaType } from '@/types'
 
+const inputComponent = {
+  input: 'Input',
+  textarea: 'Textarea',
+  radio: 'input',
+  checkbox: 'input'
+}
+
 const generateFormCode = (formSchema: FormSchemaType) => {
   return {
     vueFiles: generateVueCode(formSchema),
@@ -13,6 +20,7 @@ const generateVueCode = (formSchema: FormSchemaType) => {
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
     import { Button } from '@/components/ui/button';
+    import { Textarea } from '@/components/ui/textarea';
   \</script\>
 
 \<template\>
@@ -23,22 +31,25 @@ const generateVueCode = (formSchema: FormSchemaType) => {
   </div>
 `
 
-  const inputComponent = {
-    input: 'Input',
-    textarea: 'textarea',
-    radio: 'Input'
-  }
-
   formSchema.rows.forEach((row) => {
     generatedFormCode += `
     <div class="grid gap-2 grid-cols-${row.length}">`
     row.forEach((field) => {
-      generatedFormCode += `   
-      <div class="grid gap-1">
-        <Label for="${field.name}">${field.label}</Label>
-        <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" />
-      </div>
-    `
+      if (field.type !== 'radio' && field.type !== 'checkbox') {
+        generatedFormCode += `   
+        <div class="grid gap-1">
+          <Label for="${field.name}">${field.label}</Label>
+          <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" placeholder="${field.placeholder}" />
+        </div>
+      `
+      } else {
+        generatedFormCode += `
+        <div className="flex items-center gap-1">
+          <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" />
+          <Label htmlFor="${field.name}">${field.label}</Label>
+        </div>
+      `
+      }
     })
     generatedFormCode += `</div>
   `
@@ -58,7 +69,8 @@ const generateVueCode = (formSchema: FormSchemaType) => {
       commands: [
         'npx shadcn-vue@latest add input',
         'npx shadcn-vue@latest add label',
-        'npx shadcn-vue@latest add button'
+        'npx shadcn-vue@latest add button',
+        'npx shadcn-vue@latest add textarea'
       ]
     },
     {
@@ -76,6 +88,7 @@ const generateReactCode = (formSchema: FormSchemaType) => {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 const GeneratedForm = () => {
   return (
@@ -91,12 +104,21 @@ const GeneratedForm = () => {
       <div className="grid gap-2 grid-cols-${row.length}">`
 
     row.forEach((field) => {
-      generatedFormCode += `
+      if (field.type !== 'radio' && field.type !== 'checkbox') {
+        generatedFormCode += `
         <div className="grid gap-1">
           <Label htmlFor="${field.name}">${field.label}</Label>
-          <Input type="${field.type}" name="${field.name}" id="${field.name}" />
+          <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" placeholder="${field.placeholder}" />
         </div>
       `
+      } else {
+        generatedFormCode += `
+        <div className="flex items-center gap-1">
+          <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" />
+          <Label htmlFor="${field.name}">${field.label}</Label>
+        </div>
+      `
+      }
     })
 
     generatedFormCode += `</div>`
@@ -117,7 +139,8 @@ const GeneratedForm = () => {
       commands: [
         'npx shadcn-ui@latest add input',
         'npx shadcn-ui@latest add label',
-        'npx shadcn-ui@latest add button'
+        'npx shadcn-ui@latest add button',
+        'npx shadcn-ui@latest add textarea'
       ]
     }
   ]

@@ -10,10 +10,10 @@
       <div v-for="(field, j) in row">
         <ContextMenu>
           <ContextMenuTrigger>
-            <div v-if="field.type !== 'radio'" class="grid gap-1">
+            <div v-if="field.type !== 'radio' && field.type !== 'checkbox'" class="grid gap-1">
               <label :for="field.name">{{ field.label }}</label>
               <Field :as="field.as" :id="field.name" :name="field.name" :type="field.type"
-                class="border rounded-md p-2" />
+                :placeholder="field.placeholder" class="border rounded-md p-2" />
             </div>
             <div v-else class="flex items-center gap-1">
               <Field :as="field.as" :id="field.name" :name="field.name" :type="field.type"

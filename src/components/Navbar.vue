@@ -20,11 +20,6 @@ const toggle = () => {
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: 'Grid Generator',
-    href: '/generators/grid',
-    description: 'Create complex grid layout in Vue.js and React.js without writing any code!'
-  },
-  {
     title: 'Form Generator',
     href: '/generators/form',
     description:
@@ -35,6 +30,11 @@ const components: { title: string; href: string; description: string }[] = [
     href: '/generators/nav',
     description:
       'Create customized navbar according to your needs'
+  },
+  {
+    title: 'Grid Generator',
+    href: '/generators/grid',
+    description: 'Create complex grid layout in Vue.js and React.js without writing any code!'
   },
   {
     title: 'Sidebar Generator',
