@@ -19,6 +19,7 @@ import {
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Icon } from '@iconify/vue'
+import AddValidation from './AddValidation.vue'
 
 const ResultModal = defineAsyncComponent({
   loader: () => import('../ResultModal.vue'),
@@ -58,6 +59,16 @@ const handleRemoveInput = (position: { row: number; column: number }) => {
       if (!formSchema.value.rows.length) {
         formSchema.value.rows = []
       }
+    }
+  }
+}
+
+const handleEditInput = (position: { row: number; column: number }) => {
+  const row = formSchema.value.rows[position.row - 1]
+  if (row && row[position.column - 1]) {
+    input.value = {
+      ...row[position.column - 1],
+      position,
     }
   }
 }
@@ -193,6 +204,8 @@ const handleGenerate = () => {
 
           <hr class="mt-5" />
 
+          <!-- <AddValidation /> -->
+
           <ResultModal :vue-files="vueFiles" :react-files="reactFiles">
             <Button @click="handleGenerate">
               <PlaneTakeoff class="w-4 h-4 mr-2" /> Generate
@@ -205,7 +218,7 @@ const handleGenerate = () => {
 
       <ResizablePanel>
         <section class="w-full">
-          <FormPreview :schema="formSchema" :remove-field="handleRemoveInput" />
+          <FormPreview :schema="formSchema" :remove-field="handleRemoveInput" :edit-field="handleEditInput" />
         </section>
       </ResizablePanel>
     </ResizablePanelGroup>

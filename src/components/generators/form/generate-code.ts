@@ -39,7 +39,7 @@ const generateVueCode = (formSchema: FormSchemaType) => {
         generatedFormCode += `   
         <div class="grid gap-1">
           <Label for="${field.name}">${field.label}</Label>
-          <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" placeholder="${field.placeholder}" />
+          <${inputComponent[field.as]} type="${field.type}" name="${field.name}" id="${field.name}" placeholder="${field.placeholder ?? ''}" />
         </div>
       `
       } else {
